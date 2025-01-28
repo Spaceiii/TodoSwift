@@ -8,17 +8,29 @@
 import SwiftUI
 
 struct ListView: View {
+    var data : [Todo]
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        NavigationView {
+            List {
+                ForEach(data) { todo in
+                    RowView(todo: todo)
+                }
+            }
+            .listStyle(PlainListStyle())
+            .navigationTitle("Todo")
+            .toolbar {
+                ToolbarItem(placement: .navigation) {
+                    EditButton()
+                }
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    NavigationLink("Add", destination: AddTodoView())
+                }
+            }
         }
-        .padding()
     }
 }
 
 #Preview {
-    ListView()
+    ListView(data: Todo.testData)
 }

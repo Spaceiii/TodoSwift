@@ -8,11 +8,20 @@
 import SwiftUI
 
 struct RowView: View {
+    let todo: Todo
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        HStack {
+            Image(systemName: todo.isCompleted ? "checkmark.circle" : "circle")
+                .foregroundStyle(todo.isCompleted ? .green : .red)
+            Text(todo.title)
+            Spacer()
+        }
+        .font(.title2)
+        .padding(.vertical, 10)
     }
 }
 
 #Preview {
-    RowView()
+    RowView(todo: Todo.testData[0])
 }
